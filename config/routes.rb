@@ -4,5 +4,7 @@ root to: 'welcome#index'
 
   resources :wikis
   resources :users
+  resources :charges
+  resources :subscribers
 
 end

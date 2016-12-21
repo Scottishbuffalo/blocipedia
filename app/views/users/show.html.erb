@@ -1,0 +1,63 @@
+<br>
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#account">Account</a>
+      </h4>
+    </div>
+    <div id="account" class="collapse in">
+      <div class="panel-body">
+        Username: <%= @user.username %>
+        <br>
+        Email: <%= @user.email %>
+        <br>
+        Status: <%= @user.role %>
+        <% if @user.wiki.last  %>
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">Last Wiki</h4>
+              <p class="card-text"><%= link_to @user.wiki.last.title, wiki_path(@user.wiki.last.id) %></p>
+              <sub>Created on: <%= @user.wiki.last.created_at %></sub>
+            </div>
+          </div>
+        <% else %>
+        <h5>You have not created a wiki yet.</h5>
+        <%= link_to "Create Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#billing">Membership</a>
+      </h4>
+    </div>
+    <div id="billing" class="collapse in">
+      <div class="panel-body">
+        <h5>Your current role is <%= @user.role %></h5>
+        <h5>You may change your membership below.</h5>
+        <div class="row">
+          <% if @user.role != 'member' %>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title">Standard</h3>
+                <p class="card-text">Create and edit public Wiki's</p>
+                <%= link_to "Free Account", subscriber_path(1), method: :delete, class: 'btn btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+          <% if @user.role != 'premium' %>
+            <%= render partial: 'subscribers/subscribe', locals: { plan_id: '1002', role: 'premium', desc: "Create and edit private Wiki's.", price: '$15.99/month' } %>
+          <% end %>
+          <% if @user.role != 'admin' %>
+            <%= render partial: 'subscribers/subscribe', locals: { plan_id: '1003', role: 'admin', desc: "No rules. God Mode.", price: '$99.99/month' } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

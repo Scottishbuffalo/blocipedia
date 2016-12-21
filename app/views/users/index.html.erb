@@ -3,12 +3,18 @@
       <th class="tdr"><h4>Username</h4></th>
       <th class="tdr"><h4>Email</h4></th>
       <th class="tdr"><h4>Role</h4></th>
+      <th class="tdr"><h4>Plan</h4></th>
+      <th class="tdr"><h4>Stripe ID</h4></th>
+      <th class="tdr"><h4>Subscription ID</h4></th>
   </tr>
   <% @users.each do |user| %>
     <tr>
       <td class="tdr"><%= user.username %></td>
       <td class="tdr"><%= user.email %></td>
       <td class="tdr"><%= user.role %></td>
+      <td class="tdr"><%= user.planid %></td>
+      <td class="tdr"><%= user.stripeid %></td>
+      <td class="tdr"><%= user.subscription_id %></td>
     </tr>
   <% end %>
 </table>

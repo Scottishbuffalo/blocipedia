@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  after_action :verify_authorized, only: [:show]
   def new
     @user = User.new
   end

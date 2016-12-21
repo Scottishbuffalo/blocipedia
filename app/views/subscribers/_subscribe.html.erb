@@ -1,0 +1,22 @@
+<% if @user.role != role %>
+  <div class="col-sm-6">
+    <div class="card card-block">
+      <h3 class="card-title"><%= role.capitalize %></h3>
+      <p class="card-text"><%= desc %></p>
+      <a href="#" class="btn btn-primary"><%= price %>
+        <%= form_tag subscriber_path(1), :method => :put do %>
+          <input name="plan_id" type="hidden" value="<%= plan_id %>">
+          <input name="role" type="hidden" value="<%= role %>">
+          </input>
+          <script src="https://checkout.stripe.com/checkout.js"
+                  class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description="Subscription"
+                  data-amount="monthly"
+                  data-locale="auto">
+          </script>
+        <% end %>
+      </a>
+    </div>
+  </div>
+<% end %>

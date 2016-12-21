@@ -1,0 +1,16 @@
+<%= form_tag subscriber_path(1), :method => :put do %>
+    <article>
+      <label class="amount">
+        <span>Subscribe to Premium plan:</span>
+        <input name="plan_id" value="1002">
+        <input name="role" value="premium">
+      </label>
+    </article>
+    <script src="https://checkout.stripe.com/checkout.js"
+            class="stripe-button" data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="A month’s subscription"
+            data-amount="1599"
+            data-locale="auto">
+    </script> <p>
+  <%= link_to 'Back', user_path(current_user.id) %></p>
+<% end %>
