@@ -14,7 +14,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'pundit'
 gem 'faker'
-
+gem 'stripe'
+gem 'figaro', '1.0'
 
 
 group :development, :test do

@@ -1,3 +1,13 @@
- class WikiPolicy < ApplicationPolicy
+class WikiPolicy
+  attr_reader :user, :wiki
 
- end
+  def initialize(user, wiki)
+    @user = user
+    @wiki = wiki
+  end
+
+  def destroy?
+    user.admin? || wiki.user == @current_user
+  end
+
+end
