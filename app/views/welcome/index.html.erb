@@ -1,0 +1,47 @@
+<div class="jumbotron">
+  <h1>Blocipedia</h1>
+  <p>
+    <% if user_signed_in? %>
+      <h4> Welcome to Blocipedia, <%= current_user.name %> </h4>
+
+    <% else %>
+      <p>
+        <h4> Share your knowledge with the world </h4>
+
+        <%= link_to "Sign Up", new_user_registration_path, class: 'btn-primary btn-lg'%>
+        <%= link_to "Sign In", new_user_session_path, class: 'btn-success btn-lg' %>
+      </p>
+      <% end %>
+  </p>
+    <p>View public wikis <%=link_to "here", wikis_path %></p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>Free Plan</h3>
+          <p>Create as many public wikis as you want. For free.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>Premium Plan</h3>
+          <% if user_signed_in? %>
+
+            <% if current_user.role == 'standard'%>
+              <p>Create as many private wikis as you want. Upgrade <%= link_to "here", new_charge_path %></p>
+            <% elsif current_user.role == 'premium'%>
+              <p>You are a premium member. Enjoy! </p>
+            <% end %>
+
+          <% else %>
+          <p>Create as many private wikis as you want.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
