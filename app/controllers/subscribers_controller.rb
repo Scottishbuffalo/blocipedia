@@ -9,7 +9,7 @@ class SubscribersController < ApplicationController
   def new
   end
 
-  def update
+  def create
 
     token = params[:stripeToken]
     plan_id = params[:plan_id]

@@ -13,3 +13,42 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+ .user-info {
+   margin-top: 15px;
+   margin-right: 5px;
+   margin-left: 5px;
+   display: inline-block;
+ }
+
+ .nav {
+   margin-top: 5px;
+ }
+
+ .actions {
+   margin-top: 5px;
+ }
+
+ .account-info {
+   margin-left: 10px;
+   margin-right: 10px;
+ }
+
+ .account-container {
+   border-bottom: 1px solid lightgray;
+ }
+
+ .username {
+   font-family: Helvetica;
+   color: black;
+   font-size: medium;
+   font-weight: 500;
+ }
+
+ .email {
+   font-family: Helvetica;
+   color: gray;
+   font-size: inherit;
+   font-weight: 400;
+   margin-bottom: 5px;
+ }

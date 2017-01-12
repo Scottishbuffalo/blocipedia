@@ -1,20 +1,18 @@
-<%= form_tag subscribers_path(current_user.id), :method => :put do %>
-    <% @plans.each do |plan| %>
-        <div class="plan">
-          <h1><%= plan[:name] %></h1>
-          <p>$<%= plan[:amount]/100.00 %></p>
-          <%= form_tag( '/update', {method: :put, plan: plan}) do %>
-              <input name="plan_id" type="hidden" value="<%= plan[:id] %>">
-              <input name="role" type="hidden" value="premium">
-              </input>
-          <% end %>
-          <script src="https://checkout.stripe.com/checkout.js"
-                  class="stripe-button"
-                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                  data-description="A month’s subscription"
-                  data-amount=<% (plan[:amount]) %>
-                      data-locale="auto">
-          </script>
-        </div>
-    <% end %>
+<% @plans.each do |plan| %>
+    <div class="plan">
+      <h1><%= plan[:name] %></h1>
+      <p><%= number_to_currency(plan[:amount]/100.00) %></p>
+      <%= form_tag( '/subscribers/#{current_user.id}', method: :put) do %>
+          <input name="plan_id" type="hidden" value="<%= plan[:id] %>">
+          <input name="role" type="hidden" value="premium">
+          </input>
+      <% end %>
+      <script src="https://checkout.stripe.com/checkout.js"
+              class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="A month’s subscription"
+              data-amount=<% (plan[:amount]) %>
+                  data-locale="auto">
+      </script>
+    </div>
 <% end %>

@@ -6,5 +6,5 @@ root to: 'welcome#index'
   resources :users
   resources :charges
   resources :subscribers
-
+  resources :charges, only: [:new, :create]
 end
