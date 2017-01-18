@@ -14,7 +14,7 @@
     <ul class="nav nav-tabs">
       <% if user_signed_in? %>
       Account: <%= current_user.role %> |
-      <li>Signed in as <strong><%= link_to current_user.name, users_show_path %> </strong>|
+      <li>Signed in as <strong><%= link_to current_user.name, current_user %> </strong>|
         <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
         <% else %>
         <li><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %> -

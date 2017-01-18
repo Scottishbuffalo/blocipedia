@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  after_action :verify_authorized, only: [:show]
+  after_action :verify_authorized, except: [:show]
   def new
     @user = User.new
   end
@@ -20,20 +20,20 @@ class UsersController < ApplicationController
       render :new
     end
   end
-  
+
   def show
-    authorize :user, :show?
+    @user = User.find(params[:id])
   end
 
   def down_grade
 
-    current_user.update_attribute(:role, 'standard')
-    flash[:alert] = "You have downgraded your account, #{current_user.name}"
+    @user = current_user
+    @user.update_attribute :role, 'standard'
+    @user = User.downgrade(@user)
+    flash[:alert] = "You have downgraded your account, #{current_user.name}. Your private wikis are now public"
     redirect_to root_path
 
-    if current_user.role == 'standard'
-      flash[:alert] = "You are already a standard member"
-    end
+
   end
 
 

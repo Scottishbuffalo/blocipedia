@@ -1,20 +1,39 @@
-<h1>New Wiki</h1>
+<h1>Create a new Wiki</h1>
+
 
 <div class="row">
-  <%= form_for @wiki do |wiki| %>
-  <div class="form-group">
-    <%= wiki.label :title %>
-    <%= wiki.text_field :title, class: 'form-control', placeholder: 'Enter Wiki Title' %>
-  </div>
-  <div class="form-group">
-    <%= wiki.label :body %>
-    <%= wiki.text_area :body, class: 'form-control', placeholder: 'Enter Wiki information here' %>
-  </div>
-  <div class="form-group">
-    <%= wiki.label :private, class: 'checkbox' do %>
-    <%= wiki.check_box :private %> Private topic
+  <div class="col-md-6">
+    <%=form_for @wiki do |f| %>
+    <% if @wiki.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@wiki.errors.count, "error")%>.</h4>
+      <ul>
+        <% @wiki.errors.full_messages.each do |msg| %>
+        <li><%= msg %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control', autofocus: true, placeholder: 'Enter Wiki Title' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, rows: 8, class:'form-control', placeholder: 'Enter Wiki Body' %>
+      <small>This site supports markdown syntax. For more information, click <%= link_to 'here', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet' %> </small>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Save", class:'btn btn-primary submit-button' %>
+
+      <% if current_user.admin? || current_user.premium? %>
+      <%= f.label :private, class: 'checkbox' do %>
+      <%= f.check_box :private%> Private wiki
+      <% end %>
+      <% end %>
+    </div>
     <% end %>
   </div>
-  <%= wiki.submit "Save", class: 'btn btn-success' %>
-  <% end %>
 </div>

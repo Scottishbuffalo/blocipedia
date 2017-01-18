@@ -1,0 +1,33 @@
+<%=form_for @wikis do |f| %>
+<!-- errors list -->
+  <% if @wikis.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@wikis.errors.count, "error")%>.</h4>
+      <ul>
+        <% @wikis.errors.full_messages.each do |msg| %>
+          <li><%= msg %> </li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control', autofocus: true, placeholder: 'Enter Wiki Title'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, rows: 8, class:'form-control', placehold: 'Enter Wiki Body'%>
+      <small>This site supports markdown syntax. For more information, click <%= link_to 'here', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet' %> </small>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Save", class: 'btn btn-success' %>
+
+      <% if current_user.admin? || current_user.premium? %>
+        <%= f.label :private, class: 'checkbox' do %>
+        <%= f.check_box :private%> Private wiki
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
