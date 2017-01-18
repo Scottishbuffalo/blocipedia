@@ -1,0 +1,10 @@
+<%= form_for :collaborators do |c| %>
+  <div class="form-group">
+      <%= c.label :email %>
+      <%= c.text_field :email, class: 'form-control', autofocus: true, placeholder: 'Enter Collaborator Email' %>
+  </div>
+
+  <div class="form-group">
+    <%= c.submit "Add Collaborator", class:'btn btn-primary submit-button' %>
+  </div>
+<% end %>

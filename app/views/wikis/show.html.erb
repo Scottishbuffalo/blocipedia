@@ -1,8 +1,25 @@
 <p class="index-link"><%= link_to "Back to Wiki Index", wikis_path %></p>
 
-<%= link_to "Edit Wiki", edit_wiki_path(@wikis), class:"btn btn-success"%>
-<%= link_to "Delete Wiki", @wikis, method: :delete, class:"btn btn-danger"%>
-<h2 class="page-header"><%=markdown(@wikis.title) %><small> Created by <%=@wikis.user.name%></small></h2>
+<%= link_to "Edit Wiki", edit_wiki_path(@wiki), class:"btn btn-success"%>
+<%= link_to "Delete Wiki", @wiki, method: :delete, class:"btn btn-danger"%>
+
+<h2 class="page-header">
+   <%=markdown(@wiki.title) %>
+   <small> Created by <%=@wiki.user.name%> |
+   <% if @wiki.private? == false %>
+     Public Wiki
+   <% else %>
+     Private Wiki
+   <% end %>
+   </small>
+ </h2>
+ <div class="collaborators" >
+
+ <% if  @wiki.collaborators.exists? %>
+   <strong>Collaborators:</strong>
+     <% @wiki.collaborators.each do |c| %>
+       <small><%=c.name%> | </small>
+     <% end %
 
 <% if @wikis.private? == false %>
 <h6 class="wiki_private"> Public Wiki</h6>
